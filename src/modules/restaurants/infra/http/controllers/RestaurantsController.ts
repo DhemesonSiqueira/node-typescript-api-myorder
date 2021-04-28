@@ -10,7 +10,18 @@ export default class RestaurantsController {
 
     const restaurants = await listRestaurants.execute();
 
-    return response.json(restaurants);
+    const restaurantsWithoutPassword = restaurants.map(restaurant => {
+      return {
+        id: restaurant.id,
+        name: restaurant.name,
+        email: restaurant.email,
+        image: restaurant.image,
+        created_at: restaurant.created_at,
+        updated_at: restaurant.updated_at,
+      };
+    });
+
+    return response.json(restaurantsWithoutPassword);
   }
 
   public async create(request: Request, response: Response): Promise<Response> {

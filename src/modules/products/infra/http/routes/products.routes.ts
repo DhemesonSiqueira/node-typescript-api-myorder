@@ -7,6 +7,12 @@ const productsRouter = Router();
 const productsController = new ProductsController();
 
 productsRouter.get('/', productsController.index);
-productsRouter.post('/', productsController.create);
+productsRouter.get('/:id', productsController.show);
+
+productsRouter.post(
+  '/',
+  ensureRestaurantAuthenticated,
+  productsController.create,
+);
 
 export default productsRouter;

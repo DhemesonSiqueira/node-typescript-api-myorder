@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateProductService from '@modules/products/services/CreateProductService';
 import ListProductsService from '@modules/products/services/ListProductsService';
+import ShowProductService from '@modules/products/services/ShowProductService';
 
 export default class ProductsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -27,5 +28,15 @@ export default class ProductsController {
     const products = await listProducts.execute();
 
     return response.json(products);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const product_id = request.body.id;
+
+    const showProduct = container.resolve(ShowProductService);
+
+    const product = await showProduct.execute({ product_id });
+
+    return response.json(product);
   }
 }
