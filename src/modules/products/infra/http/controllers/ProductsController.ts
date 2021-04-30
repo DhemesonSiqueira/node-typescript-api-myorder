@@ -31,7 +31,7 @@ export default class ProductsController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const product_id = request.body.id;
+    const product_id = request.params.id;
 
     const showProduct = container.resolve(ShowProductService);
 

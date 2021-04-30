@@ -3,8 +3,8 @@ import path from 'path';
 
 import AppError from '@shared/errors/AppError';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
-import IUsersRepository from '../repositories/IUsersRepository';
-import IUserTokensRepository from '../repositories/IUserTokensRepository';
+import IRestaurantsRepository from '../repositories/IRestaurantsRepository';
+import IRestaurantTokensRepository from '../repositories/IRestaurantTokensRepository';
 
 interface IRequest {
   email: string;
@@ -13,24 +13,26 @@ interface IRequest {
 @injectable()
 class SendForgotPasswordEmailService {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
+    @inject('RestaurantsRepository')
+    private restaurantsRepository: IRestaurantsRepository,
 
     @inject('MailProvider')
     private mailProvider: IMailProvider,
 
-    @inject('UserTokensRepository')
-    private userTokensRepository: IUserTokensRepository,
+    @inject('RestaurantTokensRepository')
+    private restaurantTokensRepository: IRestaurantTokensRepository,
   ) {}
 
   public async execute({ email }: IRequest): Promise<void> {
-    const user = await this.usersRepository.findByEmail(email);
+    const restaurant = await this.restaurantsRepository.findByEmail(email);
 
-    if (!user) {
-      throw new AppError('User does not exists');
+    if (!restaurant) {
+      throw new AppError('Restaurant does not exists');
     }
 
-    const { token } = await this.userTokensRepository.generate(user.id);
+    const { token } = await this.restaurantTokensRepository.generate(
+      restaurant.id,
+    );
 
     const forgotPasswordTemplate = path.resolve(
       __dirname,
@@ -41,14 +43,14 @@ class SendForgotPasswordEmailService {
 
     await this.mailProvider.sendMail({
       to: {
-        name: user.name,
-        email: user.email,
+        name: restaurant.name,
+        email: restaurant.email,
       },
       subject: '[myOrder] Recuperação de senha',
       templateData: {
         file: forgotPasswordTemplate,
         variables: {
-          name: user.name,
+          name: restaurant.name,
           link: `http://localhost:3000/reset_password?token=${token}`,
         },
       },
