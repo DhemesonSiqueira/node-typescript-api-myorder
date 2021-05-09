@@ -7,13 +7,13 @@ import ShowProductService from '@modules/products/services/ShowProductService';
 
 export default class ProductsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, description } = request.body;
-
-    const price = Number(request.body.price);
+    const { name, description, price } = request.body;
+    const restaurant_id = request.restaurant.id;
 
     const createProduct = container.resolve(CreateProductService);
 
     const product = await createProduct.execute({
+      restaurant_id,
       name,
       description,
       price,
@@ -31,7 +31,7 @@ export default class ProductsController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const product_id = request.params.id;
+    const { product_id } = request.params;
 
     const showProduct = container.resolve(ShowProductService);
 
