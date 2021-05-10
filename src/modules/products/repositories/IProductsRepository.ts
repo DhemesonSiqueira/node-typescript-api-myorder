@@ -5,4 +5,5 @@ export default interface IUsersRepository {
   findAllProducts(): Promise<Product[]>;
   findById(id: string): Promise<Product | undefined>;
   create(data: ICreateProductDTO): Promise<Product>;
+  save(product: Product): Promise<Product>;
 }

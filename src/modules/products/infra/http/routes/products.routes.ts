@@ -22,4 +22,10 @@ productsRouter.post(
   productsController.create,
 );
 
+productsRouter.put(
+  '/:restaurant_name/:restaurant_id/:product_id',
+  ensureRestaurantAuthenticated,
+  productsController.update,
+);
+
 export default productsRouter;

@@ -34,6 +34,10 @@ class ProductsRepository implements IProductsRepository {
 
     return product;
   }
+
+  public async save(product: Product): Promise<Product> {
+    return this.ormRepository.save(product);
+  }
 }
 
 export default ProductsRepository;
