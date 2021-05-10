@@ -6,15 +6,9 @@ import ProductsController from '../controllers/ProductsController';
 const productsRouter = Router();
 const productsController = new ProductsController();
 
-productsRouter.get(
-  '/:restaurant_name/:restaurant_id',
-  productsController.index,
-);
+productsRouter.get('/:restaurant_id', productsController.index);
 
-productsRouter.get(
-  '/:restaurant_name/:restaurant_id/:product_id',
-  productsController.show,
-);
+productsRouter.get('/:restaurant_id/:product_id', productsController.show);
 
 productsRouter.post(
   '/',
@@ -23,7 +17,7 @@ productsRouter.post(
 );
 
 productsRouter.put(
-  '/:restaurant_name/:restaurant_id/:product_id',
+  '/:restaurant_id/:product_id',
   ensureRestaurantAuthenticated,
   productsController.update,
 );
