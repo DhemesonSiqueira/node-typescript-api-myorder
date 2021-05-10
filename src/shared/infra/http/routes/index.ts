@@ -8,6 +8,7 @@ import productsRouter from '@modules/products/infra/http/routes/products.routes'
 import restaurantsRouter from '@modules/restaurants/infra/http/routes/restaurants.routes';
 import restaurantSessionsRouter from '@modules/restaurants/infra/http/routes/restaurantSessions.routes';
 import restaurantPasswordRouter from '@modules/restaurants/infra/http/routes/restaurantsPassword.routes';
+import restaurantProfileRouter from '@modules/restaurants/infra/http/routes/restaurantProfile.routes';
 
 const routes = Router();
 
@@ -17,6 +18,7 @@ routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
 routes.use('/products', productsRouter);
 routes.use('/restaurants', restaurantsRouter);
+routes.use('/restaurant-profile', restaurantProfileRouter);
 routes.use('/restaurant-sessions', restaurantSessionsRouter);
 routes.use('/restaurant-password', restaurantPasswordRouter);
 
