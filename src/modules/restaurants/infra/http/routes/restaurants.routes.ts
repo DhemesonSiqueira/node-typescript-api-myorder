@@ -13,6 +13,7 @@ const restaurantImageController = new RestaurantImageController();
 const upload = multer(uploadConfig);
 
 restaurantsRouter.get('/', restaurantsController.index);
+restaurantsRouter.get('/:restaurant_id', restaurantsController.show);
 restaurantsRouter.post('/', restaurantsController.create);
 
 restaurantsRouter.patch(

@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateRestaurantService from '@modules/restaurants/services/CreateRestaurantService';
 import ListRestaurantsService from '@modules/restaurants/services/ListRestaurantsService';
+import ShowRestaurantService from '@modules/restaurants/services/ShowRestaurantService';
 
 export default class RestaurantsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -39,6 +40,25 @@ export default class RestaurantsController {
       id: restaurant.id,
       name: restaurant.name,
       email: restaurant.email,
+      created_at: restaurant.created_at,
+      updated_at: restaurant.updated_at,
+    };
+
+    return response.json(restaurantWithoutPassword);
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { restaurant_id } = request.params;
+
+    const showRestaurant = container.resolve(ShowRestaurantService);
+
+    const restaurant = await showRestaurant.execute({ restaurant_id });
+
+    const restaurantWithoutPassword = {
+      id: restaurant.id,
+      name: restaurant.name,
+      email: restaurant.email,
+      image: restaurant.image,
       created_at: restaurant.created_at,
       updated_at: restaurant.updated_at,
     };
