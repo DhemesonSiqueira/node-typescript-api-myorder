@@ -21,7 +21,7 @@ export default class ProductsController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { restaurant_id } = request.params;
+    const restaurant_id = request.restaurant.id;
 
     const listCategories = container.resolve(ListCategoriesService);
 

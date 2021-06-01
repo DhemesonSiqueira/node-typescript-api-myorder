@@ -19,7 +19,7 @@ class ListCategoriesService {
     const restaurant = await this.restaurantsRepository.findById(restaurant_id);
 
     if (!restaurant) {
-      throw new AppError('Restaurant does not exists');
+      throw new AppError('You do not have permission!');
     }
 
     const categories = await this.categoriesRepository.findAllCategories();
