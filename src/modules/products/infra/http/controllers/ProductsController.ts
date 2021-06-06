@@ -8,8 +8,8 @@ import UpdateProductService from '@modules/products/services/UpdateProductServic
 
 export default class ProductsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, description, price } = request.body;
     const restaurant_id = request.restaurant.id;
+    const { name, description, category_id, price } = request.body;
 
     const createProduct = container.resolve(CreateProductService);
 
@@ -17,6 +17,7 @@ export default class ProductsController {
       restaurant_id,
       name,
       description,
+      category_id,
       price,
     });
 

@@ -23,6 +23,10 @@ export default class CreateCategories1620614732515
             type: 'varchar',
           },
           {
+            name: 'restaurant_id',
+            type: 'uuid',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -31,6 +35,16 @@ export default class CreateCategories1620614732515
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
+          },
+        ],
+        foreignKeys: [
+          {
+            name: 'RestaurantProductCategory',
+            columnNames: ['restaurant_id'],
+            referencedTableName: 'restaurants',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
           },
         ],
       }),

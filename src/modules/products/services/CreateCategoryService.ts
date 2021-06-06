@@ -35,6 +35,7 @@ class CreateCategoryService {
     const categoty = await this.categoriesRepository.create({
       name,
       description,
+      restaurant_id,
     });
 
     return categoty;

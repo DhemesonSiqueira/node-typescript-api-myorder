@@ -19,19 +19,21 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  public async findAllCategories(): Promise<Category[]> {
-    const categories: Category[] = await this.ormRepository.find();
+  public async findAllCategories(id: string): Promise<Category[]> {
+    const categories: Category[] = await this.ormRepository.find({
+      where: { restaurant_id: { id } },
+    });
 
     return categories;
   }
 
-  // public async findById(id: string): Promise<Category | undefined> {
-  //   const product = await this.ormRepository.findOne({
-  //     where: { id },
-  //   });
+  public async findById(id: string): Promise<Category | undefined> {
+    const category = await this.ormRepository.findOne({
+      where: { id },
+    });
 
-  //   return product;
-  // }
+    return category;
+  }
 
   // public async save(product: Product): Promise<Category> {
   //   return this.ormRepository.save(product);

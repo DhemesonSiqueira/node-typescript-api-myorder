@@ -4,7 +4,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+
+import Restaurant from '@modules/restaurants/infra/typeorm/entities/Restaurant';
 
 @Entity('categories')
 class Category {
@@ -16,6 +20,13 @@ class Category {
 
   @Column()
   description: string;
+
+  @Column()
+  restaurant_id: string;
+
+  @ManyToOne(() => Restaurant, restaurant => restaurant.id)
+  @JoinColumn({ name: 'restaurant_id' })
+  restaurant: Restaurant;
 
   @CreateDateColumn()
   created_at: Date;

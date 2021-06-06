@@ -22,7 +22,9 @@ class ListCategoriesService {
       throw new AppError('You do not have permission!');
     }
 
-    const categories = await this.categoriesRepository.findAllCategories();
+    const categories = await this.categoriesRepository.findAllCategories(
+      restaurant_id,
+    );
 
     return categories;
   }
