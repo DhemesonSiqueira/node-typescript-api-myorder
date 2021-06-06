@@ -17,9 +17,15 @@ productsRouter.post(
 );
 
 productsRouter.put(
-  '/:restaurant_id/:product_id',
+  '/:product_id',
   ensureRestaurantAuthenticated,
   productsController.update,
+);
+
+productsRouter.delete(
+  '/:product_id',
+  ensureRestaurantAuthenticated,
+  productsController.destroy,
 );
 
 export default productsRouter;

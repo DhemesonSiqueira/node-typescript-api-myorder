@@ -1,25 +1,21 @@
-import { inject, injectable } from 'tsyringe';
+import { injectable, inject } from 'tsyringe';
+
+import AppError from '@shared/errors/AppError';
 
 import IRestaurantsRepository from '@modules/restaurants/repositories/IRestaurantsRepository';
-import AppError from '@shared/errors/AppError';
-import Product from '../infra/typeorm/entities/Product';
-import IProductsRepository from '../repositories/IProductsRepository';
 import ICategoriesRepository from '../repositories/ICategoriesRepository';
+import Category from '../infra/typeorm/entities/Category';
 
 interface IRequest {
+  restaurant_id: string;
+  category_id: string;
   name: string;
   description: string;
-  category_id: string;
-  restaurant_id: string;
-  price: number;
 }
 
 @injectable()
-class CreateProductService {
+class UpdateCategoryService {
   constructor(
-    @inject('ProductsRepository')
-    private productsRepository: IProductsRepository,
-
     @inject('RestaurantsRepository')
     private restaurantsRepository: IRestaurantsRepository,
 
@@ -29,11 +25,10 @@ class CreateProductService {
 
   public async execute({
     restaurant_id,
+    category_id,
     name,
     description,
-    category_id,
-    price,
-  }: IRequest): Promise<Product> {
+  }: IRequest): Promise<Category> {
     const restaurant = await this.restaurantsRepository.findById(restaurant_id);
 
     if (!restaurant) {
@@ -50,16 +45,11 @@ class CreateProductService {
       throw new AppError('Category does not exist!');
     }
 
-    const product = await this.productsRepository.create({
-      name,
-      description,
-      category_id,
-      restaurant_id,
-      price,
-    });
+    category.name = name;
+    category.description = description;
 
-    return product;
+    return this.categoriesRepository.save(category);
   }
 }
 
-export default CreateProductService;
+export default UpdateCategoryService;

@@ -6,15 +6,28 @@ import CategoriesController from '../controllers/CategoriesController';
 const categoriesRouter = Router();
 const categoriesController = new CategoriesController();
 
+categoriesRouter.get(
+  '/',
+  ensureRestaurantAuthenticated,
+  categoriesController.index,
+);
+
 categoriesRouter.post(
   '/',
   ensureRestaurantAuthenticated,
   categoriesController.create,
 );
-categoriesRouter.get(
-  '/',
+
+categoriesRouter.put(
+  '/:category_id',
   ensureRestaurantAuthenticated,
-  categoriesController.index,
+  categoriesController.update,
+);
+
+categoriesRouter.delete(
+  '/:category_id',
+  ensureRestaurantAuthenticated,
+  categoriesController.destroy,
 );
 
 export default categoriesRouter;

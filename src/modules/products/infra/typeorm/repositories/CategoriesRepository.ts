@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { DeleteResult, getRepository, Repository } from 'typeorm';
 
 import ICategoriesRepository from '@modules/products/repositories/ICategoriesRepository';
 import ICreateCategoryDTO from '@modules/products/dtos/ICreateCategoryDTO';
@@ -35,9 +35,15 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  // public async save(product: Product): Promise<Category> {
-  //   return this.ormRepository.save(product);
-  // }
+  public async save(category: Category): Promise<Category> {
+    return this.ormRepository.save(category);
+  }
+
+  public async delete(category_id: string): Promise<DeleteResult> {
+    const result = await this.ormRepository.delete({ id: category_id });
+
+    return result;
+  }
 }
 
 export default CategoriesRepository;

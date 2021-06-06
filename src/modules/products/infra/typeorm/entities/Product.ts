@@ -28,13 +28,19 @@ class Product {
   @Column()
   image: string;
 
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_id' })
+  @Column()
   category_id: string;
 
-  @ManyToOne(() => Restaurant)
-  @JoinColumn({ name: 'restaurant_id' })
+  @ManyToOne(() => Category, category => category.id)
+  @JoinColumn({ name: 'category_id' })
+  category: string;
+
+  @Column()
   restaurant_id: string;
+
+  @ManyToOne(() => Restaurant, restaurant => restaurant.id)
+  @JoinColumn({ name: 'restaurant_id' })
+  restaurant: Restaurant;
 
   @CreateDateColumn()
   created_at: Date;

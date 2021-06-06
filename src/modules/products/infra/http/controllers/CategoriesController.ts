@@ -3,8 +3,10 @@ import { container } from 'tsyringe';
 
 import CreateCategoryService from '@modules/products/services/CreateCategoryService';
 import ListCategoriesService from '@modules/products/services/ListCategoriesService';
+import UpdateCategoryService from '@modules/products/services/UpdateCategoryService';
+import DeleteCategoryService from '@modules/products/services/DeleteCategoryService';
 
-export default class ProductsController {
+export default class CategoriesController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, description } = request.body;
     const restaurant_id = request.restaurant.id;
@@ -40,22 +42,38 @@ export default class ProductsController {
   //   return response.json(product);
   // }
 
-  // public async update(request: Request, response: Response): Promise<Response> {
-  //   const { product_id } = request.params;
-  //   const restaurant_id = request.restaurant.id;
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { category_id } = request.params;
+    const restaurant_id = request.restaurant.id;
 
-  //   const { name, description, price } = request.body;
+    const { name, description } = request.body;
 
-  //   const updateProduct = container.resolve(UpdateProductService);
+    const updateCategory = container.resolve(UpdateCategoryService);
 
-  //   const product = await updateProduct.execute({
-  //     restaurant_id,
-  //     product_id,
-  //     name,
-  //     description,
-  //     price,
-  //   });
+    const category = await updateCategory.execute({
+      category_id,
+      restaurant_id,
+      name,
+      description,
+    });
 
-  //   return response.json(product);
-  // }
+    return response.json(category);
+  }
+
+  public async destroy(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const restaurant_id = request.restaurant.id;
+    const { category_id } = request.params;
+
+    const deleteCategory = container.resolve(DeleteCategoryService);
+
+    await deleteCategory.execute({
+      restaurant_id,
+      category_id,
+    });
+
+    return response.status(204).json({ message: 'deleted' });
+  }
 }
