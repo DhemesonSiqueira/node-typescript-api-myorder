@@ -5,6 +5,7 @@ import CreateCategoryService from '@modules/products/services/CreateCategoryServ
 import ListCategoriesService from '@modules/products/services/ListCategoriesService';
 import UpdateCategoryService from '@modules/products/services/UpdateCategoryService';
 import DeleteCategoryService from '@modules/products/services/DeleteCategoryService';
+import ShowCategoryService from '@modules/products/services/ShowCategoryService';
 
 export default class CategoriesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -32,15 +33,16 @@ export default class CategoriesController {
     return response.json(categories);
   }
 
-  // public async show(request: Request, response: Response): Promise<Response> {
-  //   const { product_id } = request.params;
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { category_id } = request.params;
+    const restaurant_id = request.restaurant.id;
 
-  //   const showProduct = container.resolve(ShowProductService);
+    const showCategory = container.resolve(ShowCategoryService);
 
-  //   const product = await showProduct.execute({ product_id });
+    const category = await showCategory.execute({ category_id, restaurant_id });
 
-  //   return response.json(product);
-  // }
+    return response.json(category);
+  }
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { category_id } = request.params;

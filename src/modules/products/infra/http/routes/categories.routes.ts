@@ -12,6 +12,12 @@ categoriesRouter.get(
   categoriesController.index,
 );
 
+categoriesRouter.get(
+  '/:category_id',
+  ensureRestaurantAuthenticated,
+  categoriesController.show,
+);
+
 categoriesRouter.post(
   '/',
   ensureRestaurantAuthenticated,
