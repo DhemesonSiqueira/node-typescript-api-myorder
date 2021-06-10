@@ -24,6 +24,9 @@ import CategoriesRepository from '@modules/products/infra/typeorm/repositories/C
 import ITablesRepository from '@modules/restaurants/repositories/ITablesRepository';
 import TablesRepository from '@modules/restaurants/infra/typeorm/repositories/TablesRepository';
 
+import AddressRepository from '@modules/restaurants/infra/typeorm/repositories/AddressRepository';
+import IAddressRepository from '@modules/restaurants/repositories/IAddressRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -57,4 +60,9 @@ container.registerSingleton<ICategoriesRepository>(
 container.registerSingleton<ITablesRepository>(
   'TablesRepository',
   TablesRepository,
+);
+
+container.registerSingleton<IAddressRepository>(
+  'AddressRepository',
+  AddressRepository,
 );
