@@ -3,6 +3,8 @@ import { container } from 'tsyringe';
 
 import CreateAddressService from '@modules/restaurants/services/CreateAddressService';
 import ShowAddressService from '@modules/restaurants/services/ShowAddressService';
+import UpdateAddressService from '@modules/restaurants/services/UpdateAddressService';
+import DeleteAddressService from '@modules/restaurants/services/DeleteAddressService';
 
 export default class AddressController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -43,38 +45,48 @@ export default class AddressController {
     return response.json(address);
   }
 
-  // public async update(request: Request, response: Response): Promise<Response> {
-  //   const { table_id } = request.params;
-  //   const restaurant_id = request.restaurant.id;
+  public async update(request: Request, response: Response): Promise<Response> {
+    const {
+      country,
+      state,
+      city,
+      address,
+      number,
+      additional,
+      cep,
+    } = request.body;
+    const restaurant_id = request.restaurant.id;
 
-  //   const { number, description } = request.body;
+    const updateAddress = container.resolve(UpdateAddressService);
 
-  //   const updateTable = container.resolve(UpdateTableService);
+    const restaurantAddress = await updateAddress.execute({
+      restaurant_id,
+      country,
+      state,
+      city,
+      address,
+      number,
+      additional,
+      cep,
+    });
 
-  //   const table = await updateTable.execute({
-  //     table_id,
-  //     restaurant_id,
-  //     number,
-  //     description,
-  //   });
+    return response.json(restaurantAddress);
+  }
 
-  //   return response.json(table);
-  // }
+  public async destroy(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const restaurant_id = request.restaurant.id;
+    const { address_id } = request.params;
 
-  // public async destroy(
-  //   request: Request,
-  //   response: Response,
-  // ): Promise<Response> {
-  //   const restaurant_id = request.restaurant.id;
-  //   const { table_id } = request.params;
+    const deleteAddress = container.resolve(DeleteAddressService);
 
-  //   const deleteTable = container.resolve(DeleteTableService);
+    await deleteAddress.execute({
+      restaurant_id,
+      address_id,
+    });
 
-  //   await deleteTable.execute({
-  //     restaurant_id,
-  //     table_id,
-  //   });
-
-  //   return response.status(204).json({ message: 'deleted' });
-  // }
+    return response.status(204).json({ message: 'deleted' });
+  }
 }

@@ -22,7 +22,7 @@ class AddressRepository implements IAddressRepository {
   public async findByRestaurantId(
     restaurant_id: string,
   ): Promise<Address | undefined> {
-    const address = await this.ormRepository.findOne(restaurant_id);
+    const address = await this.ormRepository.findOne({ restaurant_id });
 
     return address;
   }

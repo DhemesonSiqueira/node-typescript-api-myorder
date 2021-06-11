@@ -6,7 +6,7 @@ import AddressController from '../controllers/AddressController';
 const addressRouter = Router();
 const addressController = new AddressController();
 
-addressRouter.get('/:address_id', addressController.show);
+addressRouter.get('/:restaurant_id', addressController.show);
 
 addressRouter.post(
   '/',
@@ -14,16 +14,12 @@ addressRouter.post(
   addressController.create,
 );
 
-// addressRouter.put(
-//   '/:address_id',
-//   ensureRestaurantAuthenticated,
-//   addressController.update,
-// );
+addressRouter.put('/', ensureRestaurantAuthenticated, addressController.update);
 
-// addressRouter.delete(
-//   '/:address_id',
-//   ensureRestaurantAuthenticated,
-//   addressController.destroy,
-// );
+addressRouter.delete(
+  '/:address_id',
+  ensureRestaurantAuthenticated,
+  addressController.destroy,
+);
 
 export default addressRouter;
