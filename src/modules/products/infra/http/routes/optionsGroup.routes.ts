@@ -12,11 +12,11 @@ optionsGroupRouter.get(
   optionsGroupController.index,
 );
 
-// optionsGroupRouter.get(
-//   '/:category_id',
-//   ensureRestaurantAuthenticated,
-//   optionsGroupController.show,
-// );
+optionsGroupRouter.get(
+  '/:group_id',
+  ensureRestaurantAuthenticated,
+  optionsGroupController.show,
+);
 
 optionsGroupRouter.post(
   '/',
@@ -24,16 +24,16 @@ optionsGroupRouter.post(
   optionsGroupController.create,
 );
 
-// optionsGroupRouter.put(
-//   '/:category_id',
-//   ensureRestaurantAuthenticated,
-//   optionsGroupController.update,
-// );
+optionsGroupRouter.put(
+  '/:group_id',
+  ensureRestaurantAuthenticated,
+  optionsGroupController.update,
+);
 
-// optionsGroupRouter.delete(
-//   '/:category_id',
-//   ensureRestaurantAuthenticated,
-//   optionsGroupController.destroy,
-// );
+optionsGroupRouter.delete(
+  '/:group_id',
+  ensureRestaurantAuthenticated,
+  optionsGroupController.destroy,
+);
 
 export default optionsGroupRouter;

@@ -7,5 +7,5 @@ export default interface IOptionGroupRepository {
   findById(id: string): Promise<OptionGroup | undefined>;
   create(data: ICreateOptionGroupDTO): Promise<OptionGroup>;
   save(optionGroup: OptionGroup): Promise<OptionGroup>;
-  delete(optionGroup_id: string): Promise<DeleteResult>;
+  delete(group_id: string): Promise<DeleteResult>;
 }

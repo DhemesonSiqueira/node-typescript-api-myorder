@@ -41,8 +41,8 @@ class OptionsGroupRepository implements IOptionsGroupRepository {
     return this.ormRepository.save(optionGroup);
   }
 
-  public async delete(optionGroup_id: string): Promise<DeleteResult> {
-    const result = await this.ormRepository.delete({ id: optionGroup_id });
+  public async delete(group_id: string): Promise<DeleteResult> {
+    const result = await this.ormRepository.delete({ id: group_id });
 
     return result;
   }

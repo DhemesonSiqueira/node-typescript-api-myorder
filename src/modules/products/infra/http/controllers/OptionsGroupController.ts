@@ -3,6 +3,9 @@ import { container } from 'tsyringe';
 
 import CreateOptionGroupService from '@modules/products/services/CreateOptionGroupService';
 import ListOptionsGroupService from '@modules/products/services/ListOptionsGroupService';
+import UpdateOptionGroupService from '@modules/products/services/UpdateOptionGroupService';
+import DeleteOptionGroupService from '@modules/products/services/DeleteOptionGroupService';
+import ShowOptionGroupService from '@modules/products/services/ShowOptionGroupService';
 
 export default class OptionsGroupController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -41,49 +44,58 @@ export default class OptionsGroupController {
     return response.json(optionsGroup);
   }
 
-  // public async show(request: Request, response: Response): Promise<Response> {
-  //   const { category_id } = request.params;
-  //   const restaurant_id = request.restaurant.id;
+  public async show(request: Request, response: Response): Promise<Response> {
+    const { group_id } = request.params;
+    const restaurant_id = request.restaurant.id;
 
-  //   const showCategory = container.resolve(ShowCategoryService);
+    const showOptionGroup = container.resolve(ShowOptionGroupService);
 
-  //   const category = await showCategory.execute({ category_id, restaurant_id });
+    const optionGroup = await showOptionGroup.execute({ group_id, restaurant_id });
 
-  //   return response.json(category);
-  // }
+    return response.json(optionGroup);
+  }
 
-  // public async update(request: Request, response: Response): Promise<Response> {
-  //   const { category_id } = request.params;
-  //   const restaurant_id = request.restaurant.id;
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { group_id } = request.params;
+    const restaurant_id = request.restaurant.id;
 
-  //   const { name, description } = request.body;
+    const {
+      name,
+      description,
+      required,
+      max_quantity,
+      min_quantity,
+    } = request.body;
 
-  //   const updateCategory = container.resolve(UpdateCategoryService);
+    const updateOptionGroup = container.resolve(UpdateOptionGroupService);
 
-  //   const category = await updateCategory.execute({
-  //     category_id,
-  //     restaurant_id,
-  //     name,
-  //     description,
-  //   });
+    const optionGroup = await updateOptionGroup.execute({
+      group_id,
+      restaurant_id,
+      name,
+      description,
+      required,
+      max_quantity,
+      min_quantity,
+    });
 
-  //   return response.json(category);
-  // }
+    return response.json(optionGroup);
+  }
 
-  // public async destroy(
-  //   request: Request,
-  //   response: Response,
-  // ): Promise<Response> {
-  //   const restaurant_id = request.restaurant.id;
-  //   const { category_id } = request.params;
+  public async destroy(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const restaurant_id = request.restaurant.id;
+    const { group_id } = request.params;
 
-  //   const deleteCategory = container.resolve(DeleteCategoryService);
+    const deleteOptionGroup = container.resolve(DeleteOptionGroupService);
 
-  //   await deleteCategory.execute({
-  //     restaurant_id,
-  //     category_id,
-  //   });
+    await deleteOptionGroup.execute({
+      restaurant_id,
+      group_id,
+    });
 
-  //   return response.status(204).json({ message: 'deleted' });
-  // }
+    return response.status(204).json({ message: 'deleted' });
+  }
 }
