@@ -27,6 +27,9 @@ import TablesRepository from '@modules/restaurants/infra/typeorm/repositories/Ta
 import AddressRepository from '@modules/restaurants/infra/typeorm/repositories/AddressRepository';
 import IAddressRepository from '@modules/restaurants/repositories/IAddressRepository';
 
+import OptionsGroupRepository from '@modules/products/infra/typeorm/repositories/OptionsGroupRepository';
+import IOptionsGroupRepository from '@modules/products/repositories/IOptionsGroupRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -55,6 +58,11 @@ container.registerSingleton<IRestaurantTokensRepository>(
 container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',
   CategoriesRepository,
+);
+
+container.registerSingleton<IOptionsGroupRepository>(
+  'OptionsGroupRepository',
+  OptionsGroupRepository,
 );
 
 container.registerSingleton<ITablesRepository>(

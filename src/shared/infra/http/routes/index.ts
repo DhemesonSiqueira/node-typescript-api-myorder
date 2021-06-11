@@ -12,6 +12,7 @@ import restaurantProfileRouter from '@modules/restaurants/infra/http/routes/rest
 import categoriesRouter from '@modules/products/infra/http/routes/categories.routes';
 import tablesRouter from '@modules/restaurants/infra/http/routes/tables.routes';
 import addressRouter from '@modules/restaurants/infra/http/routes/address.routes';
+import optionsGroupRouter from '@modules/products/infra/http/routes/optionsGroup.routes';
 
 const routes = Router();
 
@@ -21,6 +22,7 @@ routes.use('/password', passwordRouter);
 routes.use('/profile', profileRouter);
 routes.use('/products', productsRouter);
 routes.use('/categories', categoriesRouter);
+routes.use('/options-group', optionsGroupRouter);
 routes.use('/tables', tablesRouter);
 routes.use('/restaurants', restaurantsRouter);
 routes.use('/address', addressRouter);

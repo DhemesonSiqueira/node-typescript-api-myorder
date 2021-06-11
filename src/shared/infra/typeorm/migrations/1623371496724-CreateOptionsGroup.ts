@@ -24,15 +24,15 @@ export default class CreateOptionsGroup1623371496724
           },
           {
             name: 'required',
-            type: 'varchar',
+            type: 'boolean',
           },
           {
             name: 'max_quantity',
-            type: 'varchar',
+            type: 'int',
           },
           {
             name: 'min_quantity',
-            type: 'varchar',
+            type: 'int',
           },
           {
             name: 'product_id',
