@@ -28,7 +28,10 @@ import AddressRepository from '@modules/restaurants/infra/typeorm/repositories/A
 import IAddressRepository from '@modules/restaurants/repositories/IAddressRepository';
 
 import OptionsGroupRepository from '@modules/products/infra/typeorm/repositories/OptionsGroupRepository';
-import IOptionsGroupRepository from '@modules/products/repositories/IOptionsGroupRepository';
+import IOptionsGroupRepository from '@modules/products/repositories/IOptionsGRepository';
+
+import OptionsRepository from '@modules/products/infra/typeorm/repositories/OptionsRepository';
+import IOptionsRepository from '@modules/products/repositories/IOptionsGroupRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -73,4 +76,9 @@ container.registerSingleton<ITablesRepository>(
 container.registerSingleton<IAddressRepository>(
   'AddressRepository',
   AddressRepository,
+);
+
+container.registerSingleton<IOptionsRepository>(
+  'OptionsRepository',
+  OptionsRepository,
 );
