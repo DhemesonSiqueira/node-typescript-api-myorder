@@ -2,15 +2,12 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateOptionService from '@modules/products/services/CreateOptionService';
+import UpdateOptionService from '@modules/products/services/UpdateOptionService';
+import DeleteOptionService from '@modules/products/services/DeleteOptionService';
 
 export default class OptionsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const {
-      name,
-      description,
-      price,
-      group_id,
-    } = request.body;
+    const { name, description, price, group_id } = request.body;
     const restaurant_id = request.restaurant.id;
 
     const createOption = container.resolve(CreateOptionService);
@@ -30,11 +27,7 @@ export default class OptionsController {
     const { option_id } = request.params;
     const restaurant_id = request.restaurant.id;
 
-    const {
-      name,
-      description,
-      price,
-    } = request.body;
+    const { name, description, price } = request.body;
 
     const updateOption = container.resolve(UpdateOptionService);
 

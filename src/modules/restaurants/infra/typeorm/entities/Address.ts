@@ -39,7 +39,7 @@ class Address {
   @Column()
   restaurant_id: string;
 
-  @ManyToOne(() => Restaurant, restaurant => restaurant.id)
+  @ManyToOne(() => Restaurant, restaurant => restaurant.address)
   @JoinColumn({ name: 'restaurant_id' })
   restaurant: Restaurant;
 

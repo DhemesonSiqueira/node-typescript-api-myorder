@@ -21,10 +21,11 @@ class OptionsGroupRepository implements IOptionsGroupRepository {
     return optionGroup;
   }
 
-  public async findAllOptionsGroup(id: string): Promise<OptionGroup[]> {
-    const optionsGroup: OptionGroup[] = await this.ormRepository.find({
-      where: { restaurant_id: { id } },
-    });
+  public async findAllOptionsGroup(
+    restaurant_id: string,
+    product_id: string,
+  ): Promise<OptionGroup[]> {
+    const optionsGroup = await this.ormRepository.find({});
 
     return optionsGroup;
   }

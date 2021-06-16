@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import Address from './Address';
 
 @Entity('restaurants')
 class Restaurant {
@@ -28,6 +30,9 @@ class Restaurant {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Address, address => address.restaurant)
+  address: Address[];
 }
 
 export default Restaurant;

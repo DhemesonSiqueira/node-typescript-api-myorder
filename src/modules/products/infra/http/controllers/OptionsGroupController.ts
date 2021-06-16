@@ -35,11 +35,14 @@ export default class OptionsGroupController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const restaurant_id = request.restaurant.id;
+    const { restaurant_id, product_id } = request.params;
 
     const listOptionsGroup = container.resolve(ListOptionsGroupService);
 
-    const optionsGroup = await listOptionsGroup.execute(restaurant_id);
+    const optionsGroup = await listOptionsGroup.execute({
+      restaurant_id,
+      product_id,
+    });
 
     return response.json(optionsGroup);
   }
@@ -50,7 +53,10 @@ export default class OptionsGroupController {
 
     const showOptionGroup = container.resolve(ShowOptionGroupService);
 
-    const optionGroup = await showOptionGroup.execute({ group_id, restaurant_id });
+    const optionGroup = await showOptionGroup.execute({
+      group_id,
+      restaurant_id,
+    });
 
     return response.json(optionGroup);
   }

@@ -9,8 +9,7 @@ const optionsGroupController = new OptionsGroupController();
 const optionsController = new OptionsController();
 
 optionsGroupRouter.get(
-  '/',
-  ensureRestaurantAuthenticated,
+  '/:restaurant_id/:product_id',
   optionsGroupController.index,
 );
 

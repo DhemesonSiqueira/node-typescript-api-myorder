@@ -12,7 +12,15 @@ class RestaurantsRepository implements IRestaurantsRepository {
   }
 
   public async findById(id: string): Promise<Restaurant | undefined> {
-    const restaurant = await this.ormRepository.findOne(id);
+    const restaurant = await this.ormRepository
+      .createQueryBuilder('restaurants')
+      .leftJoinAndSelect('restaurants.address', 'address')
+      .where('restaurants.id = :id', { id })
+      .getOne();
+    // findOne(
+    //   { id },
+    //   { relations: ['address'] },
+    // );
 
     return restaurant;
   }

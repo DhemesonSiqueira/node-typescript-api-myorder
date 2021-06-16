@@ -59,6 +59,7 @@ export default class RestaurantsController {
       name: restaurant.name,
       email: restaurant.email,
       image: restaurant.image,
+      address: restaurant.address,
       created_at: restaurant.created_at,
       updated_at: restaurant.updated_at,
     };

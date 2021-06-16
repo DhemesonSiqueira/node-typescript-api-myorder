@@ -5,6 +5,11 @@ import AppError from '@shared/errors/AppError';
 import OptionGroup from '../infra/typeorm/entities/OptionGroup';
 import IOptionsGroupRepository from '../repositories/IOptionsGroupRepository';
 
+interface IRequest {
+  restaurant_id: string;
+  product_id: string;
+}
+
 @injectable()
 class ListOptionsGroupService {
   constructor(
@@ -15,7 +20,10 @@ class ListOptionsGroupService {
     private restaurantsRepository: IRestaurantsRepository,
   ) {}
 
-  public async execute(restaurant_id: string): Promise<OptionGroup[]> {
+  public async execute({
+    restaurant_id,
+    product_id,
+  }: IRequest): Promise<OptionGroup[]> {
     const restaurant = await this.restaurantsRepository.findById(restaurant_id);
 
     if (!restaurant) {
@@ -24,6 +32,7 @@ class ListOptionsGroupService {
 
     const optionsGroup = await this.optionsGroupRepository.findAllOptionsGroup(
       restaurant_id,
+      product_id,
     );
 
     return optionsGroup;
