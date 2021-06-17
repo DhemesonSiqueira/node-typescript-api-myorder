@@ -53,7 +53,7 @@ class OptionGroup {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Option, option => option.group_id)
+  @OneToMany(() => Option, option => option.group, { eager: true })
   options: Option[];
 }
 

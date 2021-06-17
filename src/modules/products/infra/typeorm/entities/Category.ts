@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import Restaurant from '@modules/restaurants/infra/typeorm/entities/Restaurant';
+import Product from './Product';
 
 @Entity('categories')
 class Category {
@@ -33,6 +35,9 @@ class Category {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Product, product => product.category)
+  products: Product[];
 }
 
 export default Category;

@@ -27,7 +27,7 @@ class Option {
   @Column()
   group_id: string;
 
-  @ManyToOne(() => OptionGroup, group => group.id)
+  @ManyToOne(() => OptionGroup, group => group.options)
   @JoinColumn({ name: 'group_id' })
   group: OptionGroup;
 
