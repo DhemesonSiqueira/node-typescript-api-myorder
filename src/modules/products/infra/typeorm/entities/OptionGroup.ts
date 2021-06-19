@@ -36,7 +36,7 @@ class OptionGroup {
   @Column()
   product_id: string;
 
-  @ManyToOne(() => Product, product => product.id)
+  @ManyToOne(() => Product, product => product.optionsGroup)
   @JoinColumn({ name: 'product_id' })
   product: Product;
 

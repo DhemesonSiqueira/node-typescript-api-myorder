@@ -27,6 +27,9 @@ class OptionsGroupRepository implements IOptionsGroupRepository {
   ): Promise<OptionGroup[]> {
     const optionsGroup = await this.ormRepository.find({
       where: { restaurant_id, product_id },
+      order: {
+        name: 'ASC',
+      },
     });
 
     return optionsGroup;

@@ -6,10 +6,12 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import Category from '@modules/products/infra/typeorm/entities/Category';
 import Restaurant from '@modules/restaurants/infra/typeorm/entities/Restaurant';
+import OptionGroup from './OptionGroup';
 
 @Entity('products')
 class Product {
@@ -47,6 +49,9 @@ class Product {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => OptionGroup, optionsGroup => optionsGroup.product)
+  optionsGroup: OptionGroup[];
 }
 
 export default Product;

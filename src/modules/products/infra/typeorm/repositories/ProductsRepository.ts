@@ -30,6 +30,7 @@ class ProductsRepository implements IProductsRepository {
   public async findById(id: string): Promise<Product | undefined> {
     const product = await this.ormRepository.findOne({
       where: { id },
+      relations: ['optionsGroup'],
     });
 
     return product;
